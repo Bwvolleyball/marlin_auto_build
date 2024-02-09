@@ -24,7 +24,7 @@ runs:
       with:
         repository: ${{ inputs.repository }}
         token: ${{ inputs.token }}
-    - uses: actions/checkout@4
+    - uses: actions/checkout@v4
       with:
         repository: 'bwvolleyball/marlin_auto_build'
         path: 'marlin_auto_build'
