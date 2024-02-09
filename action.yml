@@ -8,30 +8,33 @@ branding:
 
 inputs:
   token:
+    description: GitHub token with access to checkout the repository
     default: ${{ github.token }}
   repository:
+    description: Repository with Marlin Firmware Source to be built
     default: ${{ github.repository }}
   actor:
+    description: GitHub Actor?
     default: ${{ github.actor }}
 
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v4
       with:
         repository: ${{ inputs.repository }}
         token: ${{ inputs.token }}
-    - uses: actions/checkout@v2.7.0
+    - uses: actions/checkout@4
       with:
-        repository: 'zisismaras/marlin_auto_build'
+        repository: 'bwvolleyball/marlin_auto_build'
         path: 'marlin_auto_build'
         persist-credentials: false
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v4
       with:
-        node-version: '16'
-    - uses: actions/setup-python@v2
+        node-version: '20'
+    - uses: actions/setup-python@v5
       with:
-        python-version: '3.9'
+        python-version: '3.10'
     - run: pip install -U platformio
       shell: bash
     - run: cd marlin_auto_build && npm install
